@@ -1,0 +1,3370 @@
+{
+  "source": "Twolittle.bites OS Hotfix 19 BASELINE_SHEET_SCHEMA.md",
+  "generated_on": "2026-10-28",
+  "caution": "Mapped fields, not live data. Review before applying to new project.",
+  "table_count": 33,
+  "tables": [
+    {
+      "name": "CONFIG",
+      "table": "config",
+      "columns": [
+        {
+          "name": "config_key",
+          "legacy_type": "String",
+          "required": true,
+          "key_reference": "PK",
+          "notes": "UPPER_SNAKE_CASE"
+        },
+        {
+          "name": "config_value",
+          "legacy_type": "String/JSON",
+          "required": true,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "value_type",
+          "legacy_type": "Enum",
+          "required": true,
+          "key_reference": "",
+          "notes": "STRING, NUMBER, BOOLEAN, JSON"
+        },
+        {
+          "name": "description",
+          "legacy_type": "String",
+          "required": false,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "updated_at",
+          "legacy_type": "ISO datetime",
+          "required": true,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "updated_by",
+          "legacy_type": "User ID",
+          "required": true,
+          "key_reference": "FK USERS",
+          "notes": ""
+        }
+      ]
+    },
+    {
+      "name": "USERS",
+      "table": "users",
+      "columns": [
+        {
+          "name": "user_id",
+          "legacy_type": "String",
+          "required": true,
+          "key_reference": "PK",
+          "notes": "USR-######"
+        },
+        {
+          "name": "email",
+          "legacy_type": "String",
+          "required": true,
+          "key_reference": "Unique",
+          "notes": "lowercase"
+        },
+        {
+          "name": "display_name",
+          "legacy_type": "String",
+          "required": true,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "role",
+          "legacy_type": "Enum",
+          "required": true,
+          "key_reference": "",
+          "notes": "OWNER, ADMIN, PRODUCTION, FINANCE, MARKETING"
+        },
+        {
+          "name": "status",
+          "legacy_type": "Enum",
+          "required": true,
+          "key_reference": "",
+          "notes": "ACTIVE, INACTIVE"
+        },
+        {
+          "name": "last_login_at",
+          "legacy_type": "ISO datetime",
+          "required": false,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "created_at",
+          "legacy_type": "ISO datetime",
+          "required": true,
+          "key_reference": "",
+          "notes": "Asia/Jakarta"
+        },
+        {
+          "name": "created_by",
+          "legacy_type": "User ID",
+          "required": true,
+          "key_reference": "FK USERS",
+          "notes": ""
+        },
+        {
+          "name": "updated_at",
+          "legacy_type": "ISO datetime",
+          "required": true,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "updated_by",
+          "legacy_type": "User ID",
+          "required": true,
+          "key_reference": "FK USERS",
+          "notes": ""
+        }
+      ]
+    },
+    {
+      "name": "BUSINESS_SETTINGS",
+      "table": "business_settings",
+      "columns": [
+        {
+          "name": "setting_key",
+          "legacy_type": "String",
+          "required": true,
+          "key_reference": "PK",
+          "notes": "e.g. invoice_prefix"
+        },
+        {
+          "name": "setting_value",
+          "legacy_type": "String/JSON",
+          "required": true,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "value_type",
+          "legacy_type": "Enum",
+          "required": true,
+          "key_reference": "",
+          "notes": "STRING, NUMBER, BOOLEAN, JSON"
+        },
+        {
+          "name": "group_name",
+          "legacy_type": "String",
+          "required": true,
+          "key_reference": "",
+          "notes": "BUSINESS, INVOICE, WHATSAPP, PAYMENT, DELIVERY"
+        },
+        {
+          "name": "description",
+          "legacy_type": "String",
+          "required": false,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "updated_at",
+          "legacy_type": "ISO datetime",
+          "required": true,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "updated_by",
+          "legacy_type": "User ID",
+          "required": true,
+          "key_reference": "FK USERS",
+          "notes": ""
+        }
+      ]
+    },
+    {
+      "name": "CUSTOMERS",
+      "table": "customers",
+      "columns": [
+        {
+          "name": "customer_id",
+          "legacy_type": "String",
+          "required": true,
+          "key_reference": "PK",
+          "notes": "CUS-######"
+        },
+        {
+          "name": "name",
+          "legacy_type": "String",
+          "required": true,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "whatsapp",
+          "legacy_type": "String",
+          "required": true,
+          "key_reference": "Indexed logical",
+          "notes": "canonical 62..."
+        },
+        {
+          "name": "email",
+          "legacy_type": "String",
+          "required": false,
+          "key_reference": "",
+          "notes": "lowercase"
+        },
+        {
+          "name": "default_address",
+          "legacy_type": "String",
+          "required": false,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "segment",
+          "legacy_type": "Enum",
+          "required": true,
+          "key_reference": "",
+          "notes": "NEW, REPEAT, VIP, DORMANT, HIGH_VALUE"
+        },
+        {
+          "name": "first_order_date",
+          "legacy_type": "Date",
+          "required": false,
+          "key_reference": "Derived/cache",
+          "notes": ""
+        },
+        {
+          "name": "last_order_date",
+          "legacy_type": "Date",
+          "required": false,
+          "key_reference": "Derived/cache",
+          "notes": ""
+        },
+        {
+          "name": "total_orders",
+          "legacy_type": "Integer",
+          "required": true,
+          "key_reference": "Derived/cache",
+          "notes": "default 0"
+        },
+        {
+          "name": "total_spend",
+          "legacy_type": "IDR integer",
+          "required": true,
+          "key_reference": "Derived/cache",
+          "notes": "default 0"
+        },
+        {
+          "name": "average_order_value",
+          "legacy_type": "IDR integer",
+          "required": true,
+          "key_reference": "Derived/cache",
+          "notes": "default 0"
+        },
+        {
+          "name": "favorite_product_id",
+          "legacy_type": "String",
+          "required": false,
+          "key_reference": "FK PRODUCTS",
+          "notes": ""
+        },
+        {
+          "name": "notes",
+          "legacy_type": "String",
+          "required": false,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "status",
+          "legacy_type": "Enum",
+          "required": true,
+          "key_reference": "",
+          "notes": "ACTIVE, ARCHIVED"
+        },
+        {
+          "name": "created_at",
+          "legacy_type": "ISO datetime",
+          "required": true,
+          "key_reference": "",
+          "notes": "Asia/Jakarta"
+        },
+        {
+          "name": "created_by",
+          "legacy_type": "User ID",
+          "required": true,
+          "key_reference": "FK USERS",
+          "notes": ""
+        },
+        {
+          "name": "updated_at",
+          "legacy_type": "ISO datetime",
+          "required": true,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "updated_by",
+          "legacy_type": "User ID",
+          "required": true,
+          "key_reference": "FK USERS",
+          "notes": ""
+        }
+      ]
+    },
+    {
+      "name": "PRODUCTS",
+      "table": "products",
+      "columns": [
+        {
+          "name": "product_id",
+          "legacy_type": "String",
+          "required": true,
+          "key_reference": "PK",
+          "notes": "PRD-######"
+        },
+        {
+          "name": "sku",
+          "legacy_type": "String",
+          "required": true,
+          "key_reference": "Unique",
+          "notes": ""
+        },
+        {
+          "name": "product_name",
+          "legacy_type": "String",
+          "required": true,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "category",
+          "legacy_type": "String",
+          "required": true,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "selling_price",
+          "legacy_type": "IDR integer",
+          "required": true,
+          "key_reference": "",
+          "notes": ">=0"
+        },
+        {
+          "name": "base_recipe_id",
+          "legacy_type": "String",
+          "required": false,
+          "key_reference": "FK RECIPES",
+          "notes": "active/default recipe"
+        },
+        {
+          "name": "default_packaging_id",
+          "legacy_type": "String",
+          "required": false,
+          "key_reference": "FK PACKAGING",
+          "notes": "optional"
+        },
+        {
+          "name": "image_url",
+          "legacy_type": "URL",
+          "required": false,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "current_cogs",
+          "legacy_type": "IDR integer",
+          "required": true,
+          "key_reference": "Derived/cache",
+          "notes": ""
+        },
+        {
+          "name": "gross_profit",
+          "legacy_type": "IDR integer",
+          "required": true,
+          "key_reference": "Derived/cache",
+          "notes": ""
+        },
+        {
+          "name": "gross_margin_pct",
+          "legacy_type": "Decimal",
+          "required": true,
+          "key_reference": "Derived/cache",
+          "notes": "0-100"
+        },
+        {
+          "name": "status",
+          "legacy_type": "Enum",
+          "required": true,
+          "key_reference": "",
+          "notes": "ACTIVE, INACTIVE, SEASONAL, ARCHIVED"
+        },
+        {
+          "name": "created_at",
+          "legacy_type": "ISO datetime",
+          "required": true,
+          "key_reference": "",
+          "notes": "Asia/Jakarta"
+        },
+        {
+          "name": "created_by",
+          "legacy_type": "User ID",
+          "required": true,
+          "key_reference": "FK USERS",
+          "notes": ""
+        },
+        {
+          "name": "updated_at",
+          "legacy_type": "ISO datetime",
+          "required": true,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "updated_by",
+          "legacy_type": "User ID",
+          "required": true,
+          "key_reference": "FK USERS",
+          "notes": ""
+        }
+      ]
+    },
+    {
+      "name": "PRODUCT_VARIANTS",
+      "table": "product_variants",
+      "columns": [
+        {
+          "name": "variant_id",
+          "legacy_type": "String",
+          "required": true,
+          "key_reference": "PK",
+          "notes": "VAR-######"
+        },
+        {
+          "name": "product_id",
+          "legacy_type": "String",
+          "required": true,
+          "key_reference": "FK PRODUCTS",
+          "notes": ""
+        },
+        {
+          "name": "variant_name",
+          "legacy_type": "String",
+          "required": true,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "size",
+          "legacy_type": "String",
+          "required": false,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "sku",
+          "legacy_type": "String",
+          "required": true,
+          "key_reference": "Unique",
+          "notes": ""
+        },
+        {
+          "name": "selling_price_override",
+          "legacy_type": "IDR integer",
+          "required": false,
+          "key_reference": "",
+          "notes": "blank = product price"
+        },
+        {
+          "name": "recipe_id",
+          "legacy_type": "String",
+          "required": false,
+          "key_reference": "FK RECIPES",
+          "notes": "blank = product base recipe"
+        },
+        {
+          "name": "status",
+          "legacy_type": "Enum",
+          "required": true,
+          "key_reference": "",
+          "notes": "ACTIVE, INACTIVE, ARCHIVED"
+        },
+        {
+          "name": "created_at",
+          "legacy_type": "ISO datetime",
+          "required": true,
+          "key_reference": "",
+          "notes": "Asia/Jakarta"
+        },
+        {
+          "name": "created_by",
+          "legacy_type": "User ID",
+          "required": true,
+          "key_reference": "FK USERS",
+          "notes": ""
+        },
+        {
+          "name": "updated_at",
+          "legacy_type": "ISO datetime",
+          "required": true,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "updated_by",
+          "legacy_type": "User ID",
+          "required": true,
+          "key_reference": "FK USERS",
+          "notes": ""
+        }
+      ]
+    },
+    {
+      "name": "INGREDIENTS",
+      "table": "ingredients",
+      "columns": [
+        {
+          "name": "ingredient_id",
+          "legacy_type": "String",
+          "required": true,
+          "key_reference": "PK",
+          "notes": "ING-######"
+        },
+        {
+          "name": "ingredient_name",
+          "legacy_type": "String",
+          "required": true,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "category",
+          "legacy_type": "String",
+          "required": true,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "base_unit",
+          "legacy_type": "Unit",
+          "required": true,
+          "key_reference": "",
+          "notes": "g, ml, pcs"
+        },
+        {
+          "name": "purchase_unit",
+          "legacy_type": "Unit",
+          "required": true,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "purchase_to_base_factor",
+          "legacy_type": "Decimal",
+          "required": true,
+          "key_reference": "",
+          "notes": ">0"
+        },
+        {
+          "name": "minimum_stock_base",
+          "legacy_type": "Decimal",
+          "required": true,
+          "key_reference": "",
+          "notes": "default 0"
+        },
+        {
+          "name": "average_cost_per_base_unit",
+          "legacy_type": "Decimal IDR",
+          "required": true,
+          "key_reference": "Derived/cache",
+          "notes": ""
+        },
+        {
+          "name": "latest_cost_per_base_unit",
+          "legacy_type": "Decimal IDR",
+          "required": true,
+          "key_reference": "Derived/cache",
+          "notes": ""
+        },
+        {
+          "name": "default_supplier_id",
+          "legacy_type": "String",
+          "required": false,
+          "key_reference": "FK SUPPLIERS",
+          "notes": ""
+        },
+        {
+          "name": "status",
+          "legacy_type": "Enum",
+          "required": true,
+          "key_reference": "",
+          "notes": "ACTIVE, INACTIVE, ARCHIVED"
+        },
+        {
+          "name": "created_at",
+          "legacy_type": "ISO datetime",
+          "required": true,
+          "key_reference": "",
+          "notes": "Asia/Jakarta"
+        },
+        {
+          "name": "created_by",
+          "legacy_type": "User ID",
+          "required": true,
+          "key_reference": "FK USERS",
+          "notes": ""
+        },
+        {
+          "name": "updated_at",
+          "legacy_type": "ISO datetime",
+          "required": true,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "updated_by",
+          "legacy_type": "User ID",
+          "required": true,
+          "key_reference": "FK USERS",
+          "notes": ""
+        }
+      ]
+    },
+    {
+      "name": "PACKAGING",
+      "table": "packaging",
+      "columns": [
+        {
+          "name": "packaging_id",
+          "legacy_type": "String",
+          "required": true,
+          "key_reference": "PK",
+          "notes": "PKG-######"
+        },
+        {
+          "name": "packaging_name",
+          "legacy_type": "String",
+          "required": true,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "category",
+          "legacy_type": "String",
+          "required": true,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "base_unit",
+          "legacy_type": "Unit",
+          "required": true,
+          "key_reference": "",
+          "notes": "normally pcs"
+        },
+        {
+          "name": "purchase_unit",
+          "legacy_type": "Unit",
+          "required": true,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "purchase_to_base_factor",
+          "legacy_type": "Decimal",
+          "required": true,
+          "key_reference": "",
+          "notes": ">0"
+        },
+        {
+          "name": "minimum_stock_base",
+          "legacy_type": "Decimal",
+          "required": true,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "average_cost_per_base_unit",
+          "legacy_type": "Decimal IDR",
+          "required": true,
+          "key_reference": "Derived/cache",
+          "notes": ""
+        },
+        {
+          "name": "latest_cost_per_base_unit",
+          "legacy_type": "Decimal IDR",
+          "required": true,
+          "key_reference": "Derived/cache",
+          "notes": ""
+        },
+        {
+          "name": "default_supplier_id",
+          "legacy_type": "String",
+          "required": false,
+          "key_reference": "FK SUPPLIERS",
+          "notes": ""
+        },
+        {
+          "name": "status",
+          "legacy_type": "Enum",
+          "required": true,
+          "key_reference": "",
+          "notes": "ACTIVE, INACTIVE, ARCHIVED"
+        },
+        {
+          "name": "created_at",
+          "legacy_type": "ISO datetime",
+          "required": true,
+          "key_reference": "",
+          "notes": "Asia/Jakarta"
+        },
+        {
+          "name": "created_by",
+          "legacy_type": "User ID",
+          "required": true,
+          "key_reference": "FK USERS",
+          "notes": ""
+        },
+        {
+          "name": "updated_at",
+          "legacy_type": "ISO datetime",
+          "required": true,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "updated_by",
+          "legacy_type": "User ID",
+          "required": true,
+          "key_reference": "FK USERS",
+          "notes": ""
+        }
+      ]
+    },
+    {
+      "name": "UNIT_CONVERSIONS",
+      "table": "unit_conversions",
+      "columns": [
+        {
+          "name": "conversion_id",
+          "legacy_type": "String",
+          "required": true,
+          "key_reference": "PK",
+          "notes": "UCV-######"
+        },
+        {
+          "name": "scope",
+          "legacy_type": "Enum",
+          "required": true,
+          "key_reference": "",
+          "notes": "STANDARD, ITEM"
+        },
+        {
+          "name": "item_type",
+          "legacy_type": "Enum",
+          "required": false,
+          "key_reference": "",
+          "notes": "INGREDIENT, PACKAGING"
+        },
+        {
+          "name": "item_id",
+          "legacy_type": "String",
+          "required": false,
+          "key_reference": "Polymorphic FK",
+          "notes": "required for ITEM scope"
+        },
+        {
+          "name": "from_unit",
+          "legacy_type": "Unit",
+          "required": true,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "to_unit",
+          "legacy_type": "Unit",
+          "required": true,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "factor",
+          "legacy_type": "Decimal",
+          "required": true,
+          "key_reference": "",
+          "notes": "qty_to = qty_from × factor"
+        },
+        {
+          "name": "status",
+          "legacy_type": "Enum",
+          "required": true,
+          "key_reference": "",
+          "notes": "ACTIVE, INACTIVE"
+        },
+        {
+          "name": "created_at",
+          "legacy_type": "ISO datetime",
+          "required": true,
+          "key_reference": "",
+          "notes": "Asia/Jakarta"
+        },
+        {
+          "name": "created_by",
+          "legacy_type": "User ID",
+          "required": true,
+          "key_reference": "FK USERS",
+          "notes": ""
+        },
+        {
+          "name": "updated_at",
+          "legacy_type": "ISO datetime",
+          "required": true,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "updated_by",
+          "legacy_type": "User ID",
+          "required": true,
+          "key_reference": "FK USERS",
+          "notes": ""
+        }
+      ]
+    },
+    {
+      "name": "RECIPES",
+      "table": "recipes",
+      "columns": [
+        {
+          "name": "recipe_id",
+          "legacy_type": "String",
+          "required": true,
+          "key_reference": "PK",
+          "notes": "RCP-######"
+        },
+        {
+          "name": "product_id",
+          "legacy_type": "String",
+          "required": true,
+          "key_reference": "FK PRODUCTS",
+          "notes": ""
+        },
+        {
+          "name": "variant_id",
+          "legacy_type": "String",
+          "required": false,
+          "key_reference": "FK PRODUCT_VARIANTS",
+          "notes": ""
+        },
+        {
+          "name": "recipe_name",
+          "legacy_type": "String",
+          "required": true,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "base_yield",
+          "legacy_type": "Decimal",
+          "required": true,
+          "key_reference": "",
+          "notes": ">0"
+        },
+        {
+          "name": "yield_unit",
+          "legacy_type": "Unit",
+          "required": true,
+          "key_reference": "",
+          "notes": "e.g. cup, pcs, box"
+        },
+        {
+          "name": "scaling_mode",
+          "legacy_type": "Enum",
+          "required": true,
+          "key_reference": "",
+          "notes": "EXACT, FULL_BATCH"
+        },
+        {
+          "name": "version",
+          "legacy_type": "Integer",
+          "required": true,
+          "key_reference": "",
+          "notes": "starts 1"
+        },
+        {
+          "name": "status",
+          "legacy_type": "Enum",
+          "required": true,
+          "key_reference": "",
+          "notes": "DRAFT, ACTIVE, INACTIVE, ARCHIVED"
+        },
+        {
+          "name": "effective_from",
+          "legacy_type": "Date",
+          "required": false,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "notes",
+          "legacy_type": "String",
+          "required": false,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "created_at",
+          "legacy_type": "ISO datetime",
+          "required": true,
+          "key_reference": "",
+          "notes": "Asia/Jakarta"
+        },
+        {
+          "name": "created_by",
+          "legacy_type": "User ID",
+          "required": true,
+          "key_reference": "FK USERS",
+          "notes": ""
+        },
+        {
+          "name": "updated_at",
+          "legacy_type": "ISO datetime",
+          "required": true,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "updated_by",
+          "legacy_type": "User ID",
+          "required": true,
+          "key_reference": "FK USERS",
+          "notes": ""
+        }
+      ]
+    },
+    {
+      "name": "RECIPE_ITEMS",
+      "table": "recipe_items",
+      "columns": [
+        {
+          "name": "recipe_item_id",
+          "legacy_type": "String",
+          "required": true,
+          "key_reference": "PK",
+          "notes": "RCI-######"
+        },
+        {
+          "name": "recipe_id",
+          "legacy_type": "String",
+          "required": true,
+          "key_reference": "FK RECIPES",
+          "notes": ""
+        },
+        {
+          "name": "item_type",
+          "legacy_type": "Enum",
+          "required": true,
+          "key_reference": "",
+          "notes": "INGREDIENT, PACKAGING"
+        },
+        {
+          "name": "item_id",
+          "legacy_type": "String",
+          "required": true,
+          "key_reference": "Polymorphic FK",
+          "notes": ""
+        },
+        {
+          "name": "quantity",
+          "legacy_type": "Decimal",
+          "required": true,
+          "key_reference": "",
+          "notes": ">0"
+        },
+        {
+          "name": "unit",
+          "legacy_type": "Unit",
+          "required": true,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "quantity_base",
+          "legacy_type": "Decimal",
+          "required": true,
+          "key_reference": "Normalized",
+          "notes": ""
+        },
+        {
+          "name": "waste_allowance_pct",
+          "legacy_type": "Decimal",
+          "required": true,
+          "key_reference": "",
+          "notes": "default 0"
+        },
+        {
+          "name": "sort_order",
+          "legacy_type": "Integer",
+          "required": true,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "notes",
+          "legacy_type": "String",
+          "required": false,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "created_at",
+          "legacy_type": "ISO datetime",
+          "required": true,
+          "key_reference": "",
+          "notes": "Asia/Jakarta"
+        },
+        {
+          "name": "created_by",
+          "legacy_type": "User ID",
+          "required": true,
+          "key_reference": "FK USERS",
+          "notes": ""
+        },
+        {
+          "name": "updated_at",
+          "legacy_type": "ISO datetime",
+          "required": true,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "updated_by",
+          "legacy_type": "User ID",
+          "required": true,
+          "key_reference": "FK USERS",
+          "notes": ""
+        }
+      ]
+    },
+    {
+      "name": "PREORDER_CAMPAIGNS",
+      "table": "preorder_campaigns",
+      "columns": [
+        {
+          "name": "preorder_campaign_id",
+          "legacy_type": "String",
+          "required": true,
+          "key_reference": "PK",
+          "notes": "PRE-YYYYMM-######"
+        },
+        {
+          "name": "campaign_name",
+          "legacy_type": "String",
+          "required": true,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "start_at",
+          "legacy_type": "ISO datetime",
+          "required": true,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "cutoff_at",
+          "legacy_type": "ISO datetime",
+          "required": true,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "production_date",
+          "legacy_type": "Date",
+          "required": true,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "fulfillment_date",
+          "legacy_type": "Date",
+          "required": true,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "maximum_capacity",
+          "legacy_type": "Decimal",
+          "required": true,
+          "key_reference": "",
+          "notes": ">0"
+        },
+        {
+          "name": "capacity_unit",
+          "legacy_type": "String",
+          "required": true,
+          "key_reference": "",
+          "notes": "box, order, pcs etc"
+        },
+        {
+          "name": "current_booked",
+          "legacy_type": "Decimal",
+          "required": true,
+          "key_reference": "Derived/cache",
+          "notes": ""
+        },
+        {
+          "name": "remaining_capacity",
+          "legacy_type": "Decimal",
+          "required": true,
+          "key_reference": "Derived/cache",
+          "notes": ""
+        },
+        {
+          "name": "status",
+          "legacy_type": "Enum",
+          "required": true,
+          "key_reference": "",
+          "notes": "DRAFT, OPEN, ALMOST_FULL, FULL, CLOSED, COMPLETED, CANCELLED"
+        },
+        {
+          "name": "notes",
+          "legacy_type": "String",
+          "required": false,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "created_at",
+          "legacy_type": "ISO datetime",
+          "required": true,
+          "key_reference": "",
+          "notes": "Asia/Jakarta"
+        },
+        {
+          "name": "created_by",
+          "legacy_type": "User ID",
+          "required": true,
+          "key_reference": "FK USERS",
+          "notes": ""
+        },
+        {
+          "name": "updated_at",
+          "legacy_type": "ISO datetime",
+          "required": true,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "updated_by",
+          "legacy_type": "User ID",
+          "required": true,
+          "key_reference": "FK USERS",
+          "notes": ""
+        }
+      ]
+    },
+    {
+      "name": "ORDERS",
+      "table": "orders",
+      "columns": [
+        {
+          "name": "order_id",
+          "legacy_type": "String",
+          "required": true,
+          "key_reference": "PK",
+          "notes": "ORD-YYYYMM-######"
+        },
+        {
+          "name": "order_date",
+          "legacy_type": "Date",
+          "required": true,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "customer_id",
+          "legacy_type": "String",
+          "required": true,
+          "key_reference": "FK CUSTOMERS",
+          "notes": ""
+        },
+        {
+          "name": "source_channel",
+          "legacy_type": "String",
+          "required": true,
+          "key_reference": "",
+          "notes": "WHATSAPP, INSTAGRAM, etc"
+        },
+        {
+          "name": "preorder_campaign_id",
+          "legacy_type": "String",
+          "required": false,
+          "key_reference": "FK PREORDER_CAMPAIGNS",
+          "notes": ""
+        },
+        {
+          "name": "order_status",
+          "legacy_type": "Enum",
+          "required": true,
+          "key_reference": "",
+          "notes": "see CONVENTIONS"
+        },
+        {
+          "name": "payment_status",
+          "legacy_type": "Enum",
+          "required": true,
+          "key_reference": "",
+          "notes": "see CONVENTIONS"
+        },
+        {
+          "name": "invoice_status",
+          "legacy_type": "Enum",
+          "required": true,
+          "key_reference": "Derived/cache",
+          "notes": "mirror active invoice"
+        },
+        {
+          "name": "fulfillment_type",
+          "legacy_type": "Enum",
+          "required": true,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "fulfillment_date",
+          "legacy_type": "Date",
+          "required": false,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "fulfillment_time_start",
+          "legacy_type": "Time",
+          "required": false,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "fulfillment_time_end",
+          "legacy_type": "Time",
+          "required": false,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "delivery_address",
+          "legacy_type": "String",
+          "required": false,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "subtotal",
+          "legacy_type": "IDR integer",
+          "required": true,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "discount",
+          "legacy_type": "IDR integer",
+          "required": true,
+          "key_reference": "",
+          "notes": "default 0"
+        },
+        {
+          "name": "delivery_fee",
+          "legacy_type": "IDR integer",
+          "required": true,
+          "key_reference": "",
+          "notes": "default 0"
+        },
+        {
+          "name": "tax",
+          "legacy_type": "IDR integer",
+          "required": true,
+          "key_reference": "",
+          "notes": "default 0"
+        },
+        {
+          "name": "grand_total",
+          "legacy_type": "IDR integer",
+          "required": true,
+          "key_reference": "",
+          "notes": ">=0"
+        },
+        {
+          "name": "notes",
+          "legacy_type": "String",
+          "required": false,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "created_at",
+          "legacy_type": "ISO datetime",
+          "required": true,
+          "key_reference": "",
+          "notes": "Asia/Jakarta"
+        },
+        {
+          "name": "created_by",
+          "legacy_type": "User ID",
+          "required": true,
+          "key_reference": "FK USERS",
+          "notes": ""
+        },
+        {
+          "name": "updated_at",
+          "legacy_type": "ISO datetime",
+          "required": true,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "updated_by",
+          "legacy_type": "User ID",
+          "required": true,
+          "key_reference": "FK USERS",
+          "notes": ""
+        }
+      ]
+    },
+    {
+      "name": "ORDER_ITEMS",
+      "table": "order_items",
+      "columns": [
+        {
+          "name": "order_item_id",
+          "legacy_type": "String",
+          "required": true,
+          "key_reference": "PK",
+          "notes": "ORI-######"
+        },
+        {
+          "name": "order_id",
+          "legacy_type": "String",
+          "required": true,
+          "key_reference": "FK ORDERS",
+          "notes": ""
+        },
+        {
+          "name": "product_id",
+          "legacy_type": "String",
+          "required": true,
+          "key_reference": "FK PRODUCTS",
+          "notes": ""
+        },
+        {
+          "name": "variant_id",
+          "legacy_type": "String",
+          "required": false,
+          "key_reference": "FK PRODUCT_VARIANTS",
+          "notes": ""
+        },
+        {
+          "name": "product_name_snapshot",
+          "legacy_type": "String",
+          "required": true,
+          "key_reference": "Snapshot",
+          "notes": ""
+        },
+        {
+          "name": "sku_snapshot",
+          "legacy_type": "String",
+          "required": true,
+          "key_reference": "Snapshot",
+          "notes": ""
+        },
+        {
+          "name": "quantity",
+          "legacy_type": "Decimal",
+          "required": true,
+          "key_reference": "",
+          "notes": ">0"
+        },
+        {
+          "name": "unit_price",
+          "legacy_type": "IDR integer",
+          "required": true,
+          "key_reference": "Snapshot",
+          "notes": ""
+        },
+        {
+          "name": "line_discount",
+          "legacy_type": "IDR integer",
+          "required": true,
+          "key_reference": "",
+          "notes": "default 0"
+        },
+        {
+          "name": "line_total",
+          "legacy_type": "IDR integer",
+          "required": true,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "production_notes",
+          "legacy_type": "String",
+          "required": false,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "created_at",
+          "legacy_type": "ISO datetime",
+          "required": true,
+          "key_reference": "",
+          "notes": "Asia/Jakarta"
+        },
+        {
+          "name": "created_by",
+          "legacy_type": "User ID",
+          "required": true,
+          "key_reference": "FK USERS",
+          "notes": ""
+        },
+        {
+          "name": "updated_at",
+          "legacy_type": "ISO datetime",
+          "required": true,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "updated_by",
+          "legacy_type": "User ID",
+          "required": true,
+          "key_reference": "FK USERS",
+          "notes": ""
+        }
+      ]
+    },
+    {
+      "name": "INVOICES",
+      "table": "invoices",
+      "columns": [
+        {
+          "name": "invoice_id",
+          "legacy_type": "String",
+          "required": true,
+          "key_reference": "PK",
+          "notes": "INV-YYYYMM-######"
+        },
+        {
+          "name": "invoice_number",
+          "legacy_type": "String",
+          "required": true,
+          "key_reference": "Unique",
+          "notes": "same/display business number"
+        },
+        {
+          "name": "order_id",
+          "legacy_type": "String",
+          "required": true,
+          "key_reference": "FK ORDERS",
+          "notes": "one active invoice/order MVP"
+        },
+        {
+          "name": "customer_id",
+          "legacy_type": "String",
+          "required": true,
+          "key_reference": "FK CUSTOMERS",
+          "notes": ""
+        },
+        {
+          "name": "invoice_date",
+          "legacy_type": "Date",
+          "required": true,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "due_at",
+          "legacy_type": "ISO datetime",
+          "required": false,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "subtotal",
+          "legacy_type": "IDR integer",
+          "required": true,
+          "key_reference": "Snapshot",
+          "notes": ""
+        },
+        {
+          "name": "discount",
+          "legacy_type": "IDR integer",
+          "required": true,
+          "key_reference": "Snapshot",
+          "notes": ""
+        },
+        {
+          "name": "delivery_fee",
+          "legacy_type": "IDR integer",
+          "required": true,
+          "key_reference": "Snapshot",
+          "notes": ""
+        },
+        {
+          "name": "tax",
+          "legacy_type": "IDR integer",
+          "required": true,
+          "key_reference": "Snapshot",
+          "notes": ""
+        },
+        {
+          "name": "grand_total",
+          "legacy_type": "IDR integer",
+          "required": true,
+          "key_reference": "Snapshot",
+          "notes": ""
+        },
+        {
+          "name": "paid_amount",
+          "legacy_type": "IDR integer",
+          "required": true,
+          "key_reference": "Derived/cache",
+          "notes": ""
+        },
+        {
+          "name": "remaining_amount",
+          "legacy_type": "IDR integer",
+          "required": true,
+          "key_reference": "Derived/cache",
+          "notes": ""
+        },
+        {
+          "name": "status",
+          "legacy_type": "Enum",
+          "required": true,
+          "key_reference": "",
+          "notes": "see CONVENTIONS"
+        },
+        {
+          "name": "last_payment_method",
+          "legacy_type": "String",
+          "required": false,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "public_token",
+          "legacy_type": "String",
+          "required": true,
+          "key_reference": "Unique",
+          "notes": "unguessable token"
+        },
+        {
+          "name": "invoice_url",
+          "legacy_type": "URL",
+          "required": true,
+          "key_reference": "Derived/cache",
+          "notes": ""
+        },
+        {
+          "name": "sent_at",
+          "legacy_type": "ISO datetime",
+          "required": false,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "created_at",
+          "legacy_type": "ISO datetime",
+          "required": true,
+          "key_reference": "",
+          "notes": "Asia/Jakarta"
+        },
+        {
+          "name": "created_by",
+          "legacy_type": "User ID",
+          "required": true,
+          "key_reference": "FK USERS",
+          "notes": ""
+        },
+        {
+          "name": "updated_at",
+          "legacy_type": "ISO datetime",
+          "required": true,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "updated_by",
+          "legacy_type": "User ID",
+          "required": true,
+          "key_reference": "FK USERS",
+          "notes": ""
+        }
+      ]
+    },
+    {
+      "name": "PAYMENTS",
+      "table": "payments",
+      "columns": [
+        {
+          "name": "payment_id",
+          "legacy_type": "String",
+          "required": true,
+          "key_reference": "PK",
+          "notes": "PAY-YYYYMM-######"
+        },
+        {
+          "name": "invoice_id",
+          "legacy_type": "String",
+          "required": true,
+          "key_reference": "FK INVOICES",
+          "notes": ""
+        },
+        {
+          "name": "order_id",
+          "legacy_type": "String",
+          "required": true,
+          "key_reference": "FK ORDERS",
+          "notes": ""
+        },
+        {
+          "name": "payment_at",
+          "legacy_type": "ISO datetime",
+          "required": true,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "amount",
+          "legacy_type": "IDR integer",
+          "required": true,
+          "key_reference": "",
+          "notes": ">0"
+        },
+        {
+          "name": "payment_method",
+          "legacy_type": "String",
+          "required": true,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "reference_no",
+          "legacy_type": "String",
+          "required": false,
+          "key_reference": "",
+          "notes": "bank/QR reference"
+        },
+        {
+          "name": "status",
+          "legacy_type": "Enum",
+          "required": true,
+          "key_reference": "",
+          "notes": "PENDING, VERIFIED, FAILED, REFUNDED"
+        },
+        {
+          "name": "proof_url",
+          "legacy_type": "URL",
+          "required": false,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "notes",
+          "legacy_type": "String",
+          "required": false,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "created_at",
+          "legacy_type": "ISO datetime",
+          "required": true,
+          "key_reference": "",
+          "notes": "Asia/Jakarta"
+        },
+        {
+          "name": "created_by",
+          "legacy_type": "User ID",
+          "required": true,
+          "key_reference": "FK USERS",
+          "notes": ""
+        },
+        {
+          "name": "updated_at",
+          "legacy_type": "ISO datetime",
+          "required": true,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "updated_by",
+          "legacy_type": "User ID",
+          "required": true,
+          "key_reference": "FK USERS",
+          "notes": ""
+        }
+      ]
+    },
+    {
+      "name": "PRODUCTION_PLANS",
+      "table": "production_plans",
+      "columns": [
+        {
+          "name": "production_plan_id",
+          "legacy_type": "String",
+          "required": true,
+          "key_reference": "PK",
+          "notes": "PPL-YYYYMM-######"
+        },
+        {
+          "name": "production_date",
+          "legacy_type": "Date",
+          "required": true,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "source_type",
+          "legacy_type": "Enum",
+          "required": true,
+          "key_reference": "",
+          "notes": "MANUAL, ORDER, PREORDER, SELECTED_ORDERS, DATE_RANGE"
+        },
+        {
+          "name": "source_id",
+          "legacy_type": "String",
+          "required": false,
+          "key_reference": "Reference",
+          "notes": ""
+        },
+        {
+          "name": "status",
+          "legacy_type": "Enum",
+          "required": true,
+          "key_reference": "",
+          "notes": "DRAFT, READY, IN_PROGRESS, COMPLETED, CANCELLED"
+        },
+        {
+          "name": "notes",
+          "legacy_type": "String",
+          "required": false,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "created_at",
+          "legacy_type": "ISO datetime",
+          "required": true,
+          "key_reference": "",
+          "notes": "Asia/Jakarta"
+        },
+        {
+          "name": "created_by",
+          "legacy_type": "User ID",
+          "required": true,
+          "key_reference": "FK USERS",
+          "notes": ""
+        },
+        {
+          "name": "updated_at",
+          "legacy_type": "ISO datetime",
+          "required": true,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "updated_by",
+          "legacy_type": "User ID",
+          "required": true,
+          "key_reference": "FK USERS",
+          "notes": ""
+        }
+      ]
+    },
+    {
+      "name": "PRODUCTION_PLAN_ITEMS",
+      "table": "production_plan_items",
+      "columns": [
+        {
+          "name": "plan_item_id",
+          "legacy_type": "String",
+          "required": true,
+          "key_reference": "PK",
+          "notes": "PPI-######"
+        },
+        {
+          "name": "production_plan_id",
+          "legacy_type": "String",
+          "required": true,
+          "key_reference": "FK PRODUCTION_PLANS",
+          "notes": ""
+        },
+        {
+          "name": "product_id",
+          "legacy_type": "String",
+          "required": true,
+          "key_reference": "FK PRODUCTS",
+          "notes": ""
+        },
+        {
+          "name": "variant_id",
+          "legacy_type": "String",
+          "required": false,
+          "key_reference": "FK PRODUCT_VARIANTS",
+          "notes": ""
+        },
+        {
+          "name": "recipe_id",
+          "legacy_type": "String",
+          "required": true,
+          "key_reference": "FK RECIPES",
+          "notes": ""
+        },
+        {
+          "name": "recipe_version",
+          "legacy_type": "Integer",
+          "required": true,
+          "key_reference": "Snapshot",
+          "notes": ""
+        },
+        {
+          "name": "target_quantity",
+          "legacy_type": "Decimal",
+          "required": true,
+          "key_reference": "",
+          "notes": ">0"
+        },
+        {
+          "name": "target_unit",
+          "legacy_type": "Unit",
+          "required": true,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "scaling_mode",
+          "legacy_type": "Enum",
+          "required": true,
+          "key_reference": "Snapshot",
+          "notes": "EXACT, FULL_BATCH"
+        },
+        {
+          "name": "multiplier",
+          "legacy_type": "Decimal",
+          "required": true,
+          "key_reference": "Calculated",
+          "notes": ""
+        },
+        {
+          "name": "required_batches",
+          "legacy_type": "Decimal",
+          "required": true,
+          "key_reference": "Calculated",
+          "notes": ""
+        },
+        {
+          "name": "expected_output",
+          "legacy_type": "Decimal",
+          "required": true,
+          "key_reference": "Calculated",
+          "notes": ""
+        },
+        {
+          "name": "expected_surplus",
+          "legacy_type": "Decimal",
+          "required": true,
+          "key_reference": "Calculated",
+          "notes": ""
+        },
+        {
+          "name": "status",
+          "legacy_type": "Enum",
+          "required": true,
+          "key_reference": "",
+          "notes": "PLANNED, READY, IN_PROGRESS, COMPLETED, CANCELLED"
+        },
+        {
+          "name": "created_at",
+          "legacy_type": "ISO datetime",
+          "required": true,
+          "key_reference": "",
+          "notes": "Asia/Jakarta"
+        },
+        {
+          "name": "created_by",
+          "legacy_type": "User ID",
+          "required": true,
+          "key_reference": "FK USERS",
+          "notes": ""
+        },
+        {
+          "name": "updated_at",
+          "legacy_type": "ISO datetime",
+          "required": true,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "updated_by",
+          "legacy_type": "User ID",
+          "required": true,
+          "key_reference": "FK USERS",
+          "notes": ""
+        }
+      ]
+    },
+    {
+      "name": "PRODUCTION_REQUIREMENTS",
+      "table": "production_requirements",
+      "columns": [
+        {
+          "name": "requirement_id",
+          "legacy_type": "String",
+          "required": true,
+          "key_reference": "PK",
+          "notes": "REQ-######"
+        },
+        {
+          "name": "production_plan_id",
+          "legacy_type": "String",
+          "required": true,
+          "key_reference": "FK PRODUCTION_PLANS",
+          "notes": ""
+        },
+        {
+          "name": "plan_item_id",
+          "legacy_type": "String",
+          "required": false,
+          "key_reference": "FK PRODUCTION_PLAN_ITEMS",
+          "notes": "blank allowed for aggregate row"
+        },
+        {
+          "name": "item_type",
+          "legacy_type": "Enum",
+          "required": true,
+          "key_reference": "",
+          "notes": "INGREDIENT, PACKAGING"
+        },
+        {
+          "name": "item_id",
+          "legacy_type": "String",
+          "required": true,
+          "key_reference": "Polymorphic FK",
+          "notes": ""
+        },
+        {
+          "name": "required_qty_base",
+          "legacy_type": "Decimal",
+          "required": true,
+          "key_reference": "Snapshot",
+          "notes": ""
+        },
+        {
+          "name": "available_stock_base",
+          "legacy_type": "Decimal",
+          "required": true,
+          "key_reference": "Snapshot at calculation",
+          "notes": ""
+        },
+        {
+          "name": "shortage_qty_base",
+          "legacy_type": "Decimal",
+          "required": true,
+          "key_reference": "Calculated snapshot",
+          "notes": ""
+        },
+        {
+          "name": "base_unit",
+          "legacy_type": "Unit",
+          "required": true,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "status",
+          "legacy_type": "Enum",
+          "required": true,
+          "key_reference": "",
+          "notes": "SUFFICIENT, LOW, SHORTAGE"
+        },
+        {
+          "name": "calculated_at",
+          "legacy_type": "ISO datetime",
+          "required": true,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "created_at",
+          "legacy_type": "ISO datetime",
+          "required": true,
+          "key_reference": "",
+          "notes": "Asia/Jakarta"
+        },
+        {
+          "name": "created_by",
+          "legacy_type": "User ID",
+          "required": true,
+          "key_reference": "FK USERS",
+          "notes": ""
+        },
+        {
+          "name": "updated_at",
+          "legacy_type": "ISO datetime",
+          "required": true,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "updated_by",
+          "legacy_type": "User ID",
+          "required": true,
+          "key_reference": "FK USERS",
+          "notes": ""
+        }
+      ]
+    },
+    {
+      "name": "PRODUCTION_BATCHES",
+      "table": "production_batches",
+      "columns": [
+        {
+          "name": "production_batch_id",
+          "legacy_type": "String",
+          "required": true,
+          "key_reference": "PK",
+          "notes": "BAT-YYYYMM-######"
+        },
+        {
+          "name": "plan_item_id",
+          "legacy_type": "String",
+          "required": true,
+          "key_reference": "FK PRODUCTION_PLAN_ITEMS",
+          "notes": ""
+        },
+        {
+          "name": "product_id",
+          "legacy_type": "String",
+          "required": true,
+          "key_reference": "FK PRODUCTS",
+          "notes": ""
+        },
+        {
+          "name": "recipe_id",
+          "legacy_type": "String",
+          "required": true,
+          "key_reference": "FK RECIPES",
+          "notes": ""
+        },
+        {
+          "name": "recipe_version",
+          "legacy_type": "Integer",
+          "required": true,
+          "key_reference": "Snapshot",
+          "notes": ""
+        },
+        {
+          "name": "batch_no",
+          "legacy_type": "Integer",
+          "required": true,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "planned_qty",
+          "legacy_type": "Decimal",
+          "required": true,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "actual_qty",
+          "legacy_type": "Decimal",
+          "required": false,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "failed_qty",
+          "legacy_type": "Decimal",
+          "required": false,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "waste_qty",
+          "legacy_type": "Decimal",
+          "required": false,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "yield_rate_pct",
+          "legacy_type": "Decimal",
+          "required": false,
+          "key_reference": "Derived",
+          "notes": ""
+        },
+        {
+          "name": "status",
+          "legacy_type": "Enum",
+          "required": true,
+          "key_reference": "",
+          "notes": "PLANNED, IN_PROGRESS, COMPLETED, CANCELLED"
+        },
+        {
+          "name": "started_at",
+          "legacy_type": "ISO datetime",
+          "required": false,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "completed_at",
+          "legacy_type": "ISO datetime",
+          "required": false,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "pic_user_id",
+          "legacy_type": "String",
+          "required": false,
+          "key_reference": "FK USERS",
+          "notes": ""
+        },
+        {
+          "name": "notes",
+          "legacy_type": "String",
+          "required": false,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "created_at",
+          "legacy_type": "ISO datetime",
+          "required": true,
+          "key_reference": "",
+          "notes": "Asia/Jakarta"
+        },
+        {
+          "name": "created_by",
+          "legacy_type": "User ID",
+          "required": true,
+          "key_reference": "FK USERS",
+          "notes": ""
+        },
+        {
+          "name": "updated_at",
+          "legacy_type": "ISO datetime",
+          "required": true,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "updated_by",
+          "legacy_type": "User ID",
+          "required": true,
+          "key_reference": "FK USERS",
+          "notes": ""
+        }
+      ]
+    },
+    {
+      "name": "INVENTORY",
+      "table": "inventory",
+      "columns": [
+        {
+          "name": "inventory_id",
+          "legacy_type": "String",
+          "required": true,
+          "key_reference": "PK",
+          "notes": "STK-######"
+        },
+        {
+          "name": "item_type",
+          "legacy_type": "Enum",
+          "required": true,
+          "key_reference": "",
+          "notes": "INGREDIENT, PACKAGING"
+        },
+        {
+          "name": "item_id",
+          "legacy_type": "String",
+          "required": true,
+          "key_reference": "Unique composite",
+          "notes": ""
+        },
+        {
+          "name": "current_stock_base",
+          "legacy_type": "Decimal",
+          "required": true,
+          "key_reference": "Derived/cache",
+          "notes": ""
+        },
+        {
+          "name": "minimum_stock_base",
+          "legacy_type": "Decimal",
+          "required": true,
+          "key_reference": "Cache/master copy",
+          "notes": ""
+        },
+        {
+          "name": "average_cost_per_base_unit",
+          "legacy_type": "Decimal IDR",
+          "required": true,
+          "key_reference": "Derived/cache",
+          "notes": ""
+        },
+        {
+          "name": "last_movement_at",
+          "legacy_type": "ISO datetime",
+          "required": false,
+          "key_reference": "Derived/cache",
+          "notes": ""
+        },
+        {
+          "name": "updated_at",
+          "legacy_type": "ISO datetime",
+          "required": true,
+          "key_reference": "",
+          "notes": ""
+        }
+      ]
+    },
+    {
+      "name": "INVENTORY_MOVEMENTS",
+      "table": "inventory_movements",
+      "columns": [
+        {
+          "name": "movement_id",
+          "legacy_type": "String",
+          "required": true,
+          "key_reference": "PK",
+          "notes": "MOV-YYYYMM-######"
+        },
+        {
+          "name": "movement_at",
+          "legacy_type": "ISO datetime",
+          "required": true,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "item_type",
+          "legacy_type": "Enum",
+          "required": true,
+          "key_reference": "",
+          "notes": "INGREDIENT, PACKAGING"
+        },
+        {
+          "name": "item_id",
+          "legacy_type": "String",
+          "required": true,
+          "key_reference": "Polymorphic FK",
+          "notes": ""
+        },
+        {
+          "name": "movement_type",
+          "legacy_type": "Enum",
+          "required": true,
+          "key_reference": "",
+          "notes": "PURCHASE, PRODUCTION_USAGE, MANUAL_ADJUSTMENT, WASTE, RETURN, STOCK_OPNAME"
+        },
+        {
+          "name": "quantity_in_base",
+          "legacy_type": "Decimal",
+          "required": true,
+          "key_reference": "",
+          "notes": "default 0"
+        },
+        {
+          "name": "quantity_out_base",
+          "legacy_type": "Decimal",
+          "required": true,
+          "key_reference": "",
+          "notes": "default 0"
+        },
+        {
+          "name": "balance_after_base",
+          "legacy_type": "Decimal",
+          "required": true,
+          "key_reference": "Calculated",
+          "notes": ""
+        },
+        {
+          "name": "base_unit",
+          "legacy_type": "Unit",
+          "required": true,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "reference_type",
+          "legacy_type": "String",
+          "required": false,
+          "key_reference": "",
+          "notes": "PURCHASE, BATCH, ADJUSTMENT etc"
+        },
+        {
+          "name": "reference_id",
+          "legacy_type": "String",
+          "required": false,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "notes",
+          "legacy_type": "String",
+          "required": false,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "created_at",
+          "legacy_type": "ISO datetime",
+          "required": true,
+          "key_reference": "",
+          "notes": "Asia/Jakarta"
+        },
+        {
+          "name": "created_by",
+          "legacy_type": "User ID",
+          "required": true,
+          "key_reference": "FK USERS",
+          "notes": ""
+        },
+        {
+          "name": "updated_at",
+          "legacy_type": "ISO datetime",
+          "required": true,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "updated_by",
+          "legacy_type": "User ID",
+          "required": true,
+          "key_reference": "FK USERS",
+          "notes": ""
+        }
+      ]
+    },
+    {
+      "name": "SUPPLIERS",
+      "table": "suppliers",
+      "columns": [
+        {
+          "name": "supplier_id",
+          "legacy_type": "String",
+          "required": true,
+          "key_reference": "PK",
+          "notes": "SUP-######"
+        },
+        {
+          "name": "supplier_name",
+          "legacy_type": "String",
+          "required": true,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "contact_person",
+          "legacy_type": "String",
+          "required": false,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "whatsapp",
+          "legacy_type": "String",
+          "required": false,
+          "key_reference": "",
+          "notes": "canonical 62..."
+        },
+        {
+          "name": "email",
+          "legacy_type": "String",
+          "required": false,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "address",
+          "legacy_type": "String",
+          "required": false,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "lead_time_days",
+          "legacy_type": "Integer",
+          "required": false,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "minimum_order_value",
+          "legacy_type": "IDR integer",
+          "required": false,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "status",
+          "legacy_type": "Enum",
+          "required": true,
+          "key_reference": "",
+          "notes": "ACTIVE, INACTIVE, ARCHIVED"
+        },
+        {
+          "name": "notes",
+          "legacy_type": "String",
+          "required": false,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "created_at",
+          "legacy_type": "ISO datetime",
+          "required": true,
+          "key_reference": "",
+          "notes": "Asia/Jakarta"
+        },
+        {
+          "name": "created_by",
+          "legacy_type": "User ID",
+          "required": true,
+          "key_reference": "FK USERS",
+          "notes": ""
+        },
+        {
+          "name": "updated_at",
+          "legacy_type": "ISO datetime",
+          "required": true,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "updated_by",
+          "legacy_type": "User ID",
+          "required": true,
+          "key_reference": "FK USERS",
+          "notes": ""
+        }
+      ]
+    },
+    {
+      "name": "PURCHASES",
+      "table": "purchases",
+      "columns": [
+        {
+          "name": "purchase_id",
+          "legacy_type": "String",
+          "required": true,
+          "key_reference": "PK",
+          "notes": "PUR-YYYYMM-######"
+        },
+        {
+          "name": "supplier_id",
+          "legacy_type": "String",
+          "required": true,
+          "key_reference": "FK SUPPLIERS",
+          "notes": ""
+        },
+        {
+          "name": "purchase_date",
+          "legacy_type": "Date",
+          "required": true,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "expected_date",
+          "legacy_type": "Date",
+          "required": false,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "received_date",
+          "legacy_type": "Date",
+          "required": false,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "status",
+          "legacy_type": "Enum",
+          "required": true,
+          "key_reference": "",
+          "notes": "DRAFT, ORDERED, PARTIAL_RECEIVED, RECEIVED, CANCELLED"
+        },
+        {
+          "name": "payment_status",
+          "legacy_type": "Enum",
+          "required": true,
+          "key_reference": "",
+          "notes": "UNPAID, PARTIAL, PAID, REFUNDED"
+        },
+        {
+          "name": "subtotal",
+          "legacy_type": "IDR integer",
+          "required": true,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "delivery_cost",
+          "legacy_type": "IDR integer",
+          "required": true,
+          "key_reference": "",
+          "notes": "default 0"
+        },
+        {
+          "name": "total_cost",
+          "legacy_type": "IDR integer",
+          "required": true,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "notes",
+          "legacy_type": "String",
+          "required": false,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "created_at",
+          "legacy_type": "ISO datetime",
+          "required": true,
+          "key_reference": "",
+          "notes": "Asia/Jakarta"
+        },
+        {
+          "name": "created_by",
+          "legacy_type": "User ID",
+          "required": true,
+          "key_reference": "FK USERS",
+          "notes": ""
+        },
+        {
+          "name": "updated_at",
+          "legacy_type": "ISO datetime",
+          "required": true,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "updated_by",
+          "legacy_type": "User ID",
+          "required": true,
+          "key_reference": "FK USERS",
+          "notes": ""
+        }
+      ]
+    },
+    {
+      "name": "PURCHASE_ITEMS",
+      "table": "purchase_items",
+      "columns": [
+        {
+          "name": "purchase_item_id",
+          "legacy_type": "String",
+          "required": true,
+          "key_reference": "PK",
+          "notes": "PUI-######"
+        },
+        {
+          "name": "purchase_id",
+          "legacy_type": "String",
+          "required": true,
+          "key_reference": "FK PURCHASES",
+          "notes": ""
+        },
+        {
+          "name": "item_type",
+          "legacy_type": "Enum",
+          "required": true,
+          "key_reference": "",
+          "notes": "INGREDIENT, PACKAGING"
+        },
+        {
+          "name": "item_id",
+          "legacy_type": "String",
+          "required": true,
+          "key_reference": "Polymorphic FK",
+          "notes": ""
+        },
+        {
+          "name": "quantity",
+          "legacy_type": "Decimal",
+          "required": true,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "unit",
+          "legacy_type": "Unit",
+          "required": true,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "quantity_base",
+          "legacy_type": "Decimal",
+          "required": true,
+          "key_reference": "Normalized",
+          "notes": ""
+        },
+        {
+          "name": "unit_cost",
+          "legacy_type": "IDR decimal",
+          "required": true,
+          "key_reference": "",
+          "notes": "per entered unit"
+        },
+        {
+          "name": "total_cost",
+          "legacy_type": "IDR integer",
+          "required": true,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "received_qty_base",
+          "legacy_type": "Decimal",
+          "required": true,
+          "key_reference": "",
+          "notes": "default 0"
+        },
+        {
+          "name": "created_at",
+          "legacy_type": "ISO datetime",
+          "required": true,
+          "key_reference": "",
+          "notes": "Asia/Jakarta"
+        },
+        {
+          "name": "created_by",
+          "legacy_type": "User ID",
+          "required": true,
+          "key_reference": "FK USERS",
+          "notes": ""
+        },
+        {
+          "name": "updated_at",
+          "legacy_type": "ISO datetime",
+          "required": true,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "updated_by",
+          "legacy_type": "User ID",
+          "required": true,
+          "key_reference": "FK USERS",
+          "notes": ""
+        }
+      ]
+    },
+    {
+      "name": "EXPENSES",
+      "table": "expenses",
+      "columns": [
+        {
+          "name": "expense_id",
+          "legacy_type": "String",
+          "required": true,
+          "key_reference": "PK",
+          "notes": "EXP-YYYYMM-######"
+        },
+        {
+          "name": "expense_date",
+          "legacy_type": "Date",
+          "required": true,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "category",
+          "legacy_type": "String",
+          "required": true,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "vendor",
+          "legacy_type": "String",
+          "required": false,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "amount",
+          "legacy_type": "IDR integer",
+          "required": true,
+          "key_reference": "",
+          "notes": ">0"
+        },
+        {
+          "name": "payment_method",
+          "legacy_type": "String",
+          "required": true,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "receipt_url",
+          "legacy_type": "URL",
+          "required": false,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "status",
+          "legacy_type": "Enum",
+          "required": true,
+          "key_reference": "",
+          "notes": "DRAFT, POSTED, CANCELLED"
+        },
+        {
+          "name": "notes",
+          "legacy_type": "String",
+          "required": false,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "created_at",
+          "legacy_type": "ISO datetime",
+          "required": true,
+          "key_reference": "",
+          "notes": "Asia/Jakarta"
+        },
+        {
+          "name": "created_by",
+          "legacy_type": "User ID",
+          "required": true,
+          "key_reference": "FK USERS",
+          "notes": ""
+        },
+        {
+          "name": "updated_at",
+          "legacy_type": "ISO datetime",
+          "required": true,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "updated_by",
+          "legacy_type": "User ID",
+          "required": true,
+          "key_reference": "FK USERS",
+          "notes": ""
+        }
+      ]
+    },
+    {
+      "name": "TRANSACTIONS",
+      "table": "transactions",
+      "columns": [
+        {
+          "name": "transaction_id",
+          "legacy_type": "String",
+          "required": true,
+          "key_reference": "PK",
+          "notes": "TRX-YYYYMM-######"
+        },
+        {
+          "name": "transaction_at",
+          "legacy_type": "ISO datetime",
+          "required": true,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "transaction_type",
+          "legacy_type": "Enum",
+          "required": true,
+          "key_reference": "",
+          "notes": "SALES, EXPENSE, PURCHASE, REFUND, OTHER_INCOME, OWNER_INJECTION, WITHDRAWAL"
+        },
+        {
+          "name": "category",
+          "legacy_type": "String",
+          "required": false,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "reference_type",
+          "legacy_type": "String",
+          "required": false,
+          "key_reference": "",
+          "notes": "PAYMENT, EXPENSE, PURCHASE, etc"
+        },
+        {
+          "name": "reference_id",
+          "legacy_type": "String",
+          "required": false,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "amount_in",
+          "legacy_type": "IDR integer",
+          "required": true,
+          "key_reference": "",
+          "notes": "default 0"
+        },
+        {
+          "name": "amount_out",
+          "legacy_type": "IDR integer",
+          "required": true,
+          "key_reference": "",
+          "notes": "default 0"
+        },
+        {
+          "name": "payment_method",
+          "legacy_type": "String",
+          "required": false,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "notes",
+          "legacy_type": "String",
+          "required": false,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "created_at",
+          "legacy_type": "ISO datetime",
+          "required": true,
+          "key_reference": "",
+          "notes": "Asia/Jakarta"
+        },
+        {
+          "name": "created_by",
+          "legacy_type": "User ID",
+          "required": true,
+          "key_reference": "FK USERS",
+          "notes": ""
+        },
+        {
+          "name": "updated_at",
+          "legacy_type": "ISO datetime",
+          "required": true,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "updated_by",
+          "legacy_type": "User ID",
+          "required": true,
+          "key_reference": "FK USERS",
+          "notes": ""
+        }
+      ]
+    },
+    {
+      "name": "BUSINESS_TARGETS",
+      "table": "business_targets",
+      "columns": [
+        {
+          "name": "target_id",
+          "legacy_type": "String",
+          "required": true,
+          "key_reference": "PK",
+          "notes": "TGT-######"
+        },
+        {
+          "name": "period_type",
+          "legacy_type": "Enum",
+          "required": true,
+          "key_reference": "",
+          "notes": "MONTHLY, QUARTERLY, ANNUAL"
+        },
+        {
+          "name": "period_start",
+          "legacy_type": "Date",
+          "required": true,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "period_end",
+          "legacy_type": "Date",
+          "required": true,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "metric_key",
+          "legacy_type": "String",
+          "required": true,
+          "key_reference": "",
+          "notes": "REVENUE, PROFIT, ORDERS, etc"
+        },
+        {
+          "name": "target_value",
+          "legacy_type": "Decimal",
+          "required": true,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "unit",
+          "legacy_type": "String",
+          "required": true,
+          "key_reference": "",
+          "notes": "IDR, COUNT, PERCENT"
+        },
+        {
+          "name": "status",
+          "legacy_type": "Enum",
+          "required": true,
+          "key_reference": "",
+          "notes": "ACTIVE, CLOSED"
+        },
+        {
+          "name": "created_at",
+          "legacy_type": "ISO datetime",
+          "required": true,
+          "key_reference": "",
+          "notes": "Asia/Jakarta"
+        },
+        {
+          "name": "created_by",
+          "legacy_type": "User ID",
+          "required": true,
+          "key_reference": "FK USERS",
+          "notes": ""
+        },
+        {
+          "name": "updated_at",
+          "legacy_type": "ISO datetime",
+          "required": true,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "updated_by",
+          "legacy_type": "User ID",
+          "required": true,
+          "key_reference": "FK USERS",
+          "notes": ""
+        }
+      ]
+    },
+    {
+      "name": "MARKETING_CAMPAIGNS",
+      "table": "marketing_campaigns",
+      "columns": [
+        {
+          "name": "marketing_campaign_id",
+          "legacy_type": "String",
+          "required": true,
+          "key_reference": "PK",
+          "notes": "MKT-YYYYMM-######"
+        },
+        {
+          "name": "campaign_name",
+          "legacy_type": "String",
+          "required": true,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "start_date",
+          "legacy_type": "Date",
+          "required": true,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "end_date",
+          "legacy_type": "Date",
+          "required": false,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "budget",
+          "legacy_type": "IDR integer",
+          "required": true,
+          "key_reference": "",
+          "notes": "default 0"
+        },
+        {
+          "name": "spend",
+          "legacy_type": "IDR integer",
+          "required": true,
+          "key_reference": "Derived/manual MVP",
+          "notes": ""
+        },
+        {
+          "name": "revenue_attributed",
+          "legacy_type": "IDR integer",
+          "required": true,
+          "key_reference": "Derived",
+          "notes": ""
+        },
+        {
+          "name": "orders_attributed",
+          "legacy_type": "Integer",
+          "required": true,
+          "key_reference": "Derived",
+          "notes": ""
+        },
+        {
+          "name": "new_customers",
+          "legacy_type": "Integer",
+          "required": true,
+          "key_reference": "Derived",
+          "notes": ""
+        },
+        {
+          "name": "repeat_customers",
+          "legacy_type": "Integer",
+          "required": true,
+          "key_reference": "Derived",
+          "notes": ""
+        },
+        {
+          "name": "status",
+          "legacy_type": "Enum",
+          "required": true,
+          "key_reference": "",
+          "notes": "DRAFT, ACTIVE, COMPLETED, CANCELLED"
+        },
+        {
+          "name": "created_at",
+          "legacy_type": "ISO datetime",
+          "required": true,
+          "key_reference": "",
+          "notes": "Asia/Jakarta"
+        },
+        {
+          "name": "created_by",
+          "legacy_type": "User ID",
+          "required": true,
+          "key_reference": "FK USERS",
+          "notes": ""
+        },
+        {
+          "name": "updated_at",
+          "legacy_type": "ISO datetime",
+          "required": true,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "updated_by",
+          "legacy_type": "User ID",
+          "required": true,
+          "key_reference": "FK USERS",
+          "notes": ""
+        }
+      ]
+    },
+    {
+      "name": "CONTENT",
+      "table": "content",
+      "columns": [
+        {
+          "name": "content_id",
+          "legacy_type": "String",
+          "required": true,
+          "key_reference": "PK",
+          "notes": "CNT-######"
+        },
+        {
+          "name": "marketing_campaign_id",
+          "legacy_type": "String",
+          "required": false,
+          "key_reference": "FK MARKETING_CAMPAIGNS",
+          "notes": ""
+        },
+        {
+          "name": "platform",
+          "legacy_type": "Enum",
+          "required": true,
+          "key_reference": "",
+          "notes": "INSTAGRAM, TIKTOK, THREADS, WHATSAPP, OTHER"
+        },
+        {
+          "name": "pillar",
+          "legacy_type": "String",
+          "required": false,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "format",
+          "legacy_type": "String",
+          "required": false,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "publish_date",
+          "legacy_type": "Date",
+          "required": false,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "url",
+          "legacy_type": "URL",
+          "required": false,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "reach",
+          "legacy_type": "Integer",
+          "required": true,
+          "key_reference": "",
+          "notes": "default 0"
+        },
+        {
+          "name": "views",
+          "legacy_type": "Integer",
+          "required": true,
+          "key_reference": "",
+          "notes": "default 0"
+        },
+        {
+          "name": "engagement",
+          "legacy_type": "Integer",
+          "required": true,
+          "key_reference": "",
+          "notes": "default 0"
+        },
+        {
+          "name": "link_click",
+          "legacy_type": "Integer",
+          "required": true,
+          "key_reference": "",
+          "notes": "default 0"
+        },
+        {
+          "name": "orders_attributed",
+          "legacy_type": "Integer",
+          "required": true,
+          "key_reference": "",
+          "notes": "default 0"
+        },
+        {
+          "name": "revenue_attributed",
+          "legacy_type": "IDR integer",
+          "required": true,
+          "key_reference": "",
+          "notes": "default 0"
+        },
+        {
+          "name": "notes",
+          "legacy_type": "String",
+          "required": false,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "created_at",
+          "legacy_type": "ISO datetime",
+          "required": true,
+          "key_reference": "",
+          "notes": "Asia/Jakarta"
+        },
+        {
+          "name": "created_by",
+          "legacy_type": "User ID",
+          "required": true,
+          "key_reference": "FK USERS",
+          "notes": ""
+        },
+        {
+          "name": "updated_at",
+          "legacy_type": "ISO datetime",
+          "required": true,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "updated_by",
+          "legacy_type": "User ID",
+          "required": true,
+          "key_reference": "FK USERS",
+          "notes": ""
+        }
+      ]
+    },
+    {
+      "name": "DAILY_METRICS",
+      "table": "daily_metrics",
+      "columns": [
+        {
+          "name": "metric_date",
+          "legacy_type": "Date",
+          "required": true,
+          "key_reference": "Composite PK",
+          "notes": ""
+        },
+        {
+          "name": "metric_key",
+          "legacy_type": "String",
+          "required": true,
+          "key_reference": "Composite PK",
+          "notes": ""
+        },
+        {
+          "name": "metric_value",
+          "legacy_type": "Decimal",
+          "required": true,
+          "key_reference": "Derived cache",
+          "notes": ""
+        },
+        {
+          "name": "unit",
+          "legacy_type": "String",
+          "required": true,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "calculated_at",
+          "legacy_type": "ISO datetime",
+          "required": true,
+          "key_reference": "",
+          "notes": ""
+        }
+      ]
+    },
+    {
+      "name": "MONTHLY_METRICS",
+      "table": "monthly_metrics",
+      "columns": [
+        {
+          "name": "month",
+          "legacy_type": "String YYYY-MM",
+          "required": true,
+          "key_reference": "Composite PK",
+          "notes": ""
+        },
+        {
+          "name": "metric_key",
+          "legacy_type": "String",
+          "required": true,
+          "key_reference": "Composite PK",
+          "notes": ""
+        },
+        {
+          "name": "metric_value",
+          "legacy_type": "Decimal",
+          "required": true,
+          "key_reference": "Derived cache",
+          "notes": ""
+        },
+        {
+          "name": "unit",
+          "legacy_type": "String",
+          "required": true,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "calculated_at",
+          "legacy_type": "ISO datetime",
+          "required": true,
+          "key_reference": "",
+          "notes": ""
+        }
+      ]
+    },
+    {
+      "name": "ACTIVITY_LOG",
+      "table": "activity_log",
+      "columns": [
+        {
+          "name": "log_id",
+          "legacy_type": "String",
+          "required": true,
+          "key_reference": "PK",
+          "notes": "LOG-YYYYMM-######"
+        },
+        {
+          "name": "timestamp",
+          "legacy_type": "ISO datetime",
+          "required": true,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "user_id",
+          "legacy_type": "String",
+          "required": true,
+          "key_reference": "FK USERS",
+          "notes": ""
+        },
+        {
+          "name": "action",
+          "legacy_type": "Enum",
+          "required": true,
+          "key_reference": "",
+          "notes": "CREATE, UPDATE, ARCHIVE, STATUS_CHANGE, PAYMENT, STOCK_ADJUSTMENT"
+        },
+        {
+          "name": "entity_type",
+          "legacy_type": "String",
+          "required": true,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "entity_id",
+          "legacy_type": "String",
+          "required": true,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "before_json",
+          "legacy_type": "JSON String",
+          "required": false,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "after_json",
+          "legacy_type": "JSON String",
+          "required": false,
+          "key_reference": "",
+          "notes": ""
+        },
+        {
+          "name": "source",
+          "legacy_type": "String",
+          "required": true,
+          "key_reference": "",
+          "notes": "WEB_APP, SYSTEM"
+        },
+        {
+          "name": "notes",
+          "legacy_type": "String",
+          "required": false,
+          "key_reference": "",
+          "notes": ""
+        }
+      ]
+    }
+  ]
+}
