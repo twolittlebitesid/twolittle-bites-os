@@ -11,7 +11,7 @@
     "check": "npm run verify:blueprint && npm run test && npm run build && npm run audit:scaffold",
     "verify:blueprint": "node specs/tools/verify_blueprint.mjs",
     "audit:scaffold": "node scripts/audit-scaffold.mjs",
-    "sync": "git pull origin main --allow-unrelated-histories --no-edit || true && git push -u origin HEAD",
+    "sync": "git push -u origin HEAD",
     "rollback": "git checkout -- . && git clean -fd"
   },
   "dependencies": {
